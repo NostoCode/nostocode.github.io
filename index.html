@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="modern">
+<html lang="en" data-theme="ancient">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NostoCode — Ancient Coding Mode OJ</title>
+  <meta name="description" content="NostoCode — Ancient Coding Mode OJ. Play at nostocode.vercel.app">
+  <link rel="canonical" href="https://nostocode.vercel.app/problems">
+  <script>
+    (function () {
+      if (new URLSearchParams(location.search).has("go")) {
+        location.replace("https://nostocode.vercel.app/problems");
+        return;
+      }
+      var saved = localStorage.getItem("nostocode-landing-theme");
+      document.documentElement.setAttribute("data-theme", saved === "modern" ? "modern" : "ancient");
+    })();
+  </script>
   <style>
     /* ============================================================
        CSS Variables — Modern (Dark) Theme
@@ -369,8 +381,8 @@
 <body>
   <!-- Theme toggle -->
   <div class="theme-toggle">
-    <button id="btn-modern" class="active" onclick="setTheme('modern')">🌙 Modern</button>
-    <button id="btn-ancient" onclick="setTheme('ancient')">🏛 Ancient</button>
+    <button id="btn-modern" onclick="setTheme('modern')">🌙 Modern</button>
+    <button id="btn-ancient" class="active" onclick="setTheme('ancient')">🏛 Ancient</button>
   </div>
 
   <!-- Win98 Window (ancient mode only) -->
@@ -427,18 +439,20 @@
       <a class="btn btn-secondary" href="https://nostocode.vercel.app/sign-in">Sign In</a>
       <a class="btn btn-secondary" href="https://github.com/NostoCode/nostocode-src">📦 Source</a>
     </div>
+    <p class="tagline" style="margin-top:1.5rem;font-size:0.85rem;">
+      App hosted at <a href="https://nostocode.vercel.app/problems" style="color:var(--amber);font-weight:600;">nostocode.vercel.app</a>
+      · <a href="?go=1" style="color:var(--muted);">Skip landing →</a>
+    </p>
   </div>
 
   <script>
     function setTheme(t) {
-      document.documentElement.setAttribute('data-theme', t);
-      document.getElementById('btn-modern').classList.toggle('active', t === 'modern');
-      document.getElementById('btn-ancient').classList.toggle('active', t === 'ancient');
-      localStorage.setItem('nostocode-landing-theme', t);
+      document.documentElement.setAttribute("data-theme", t);
+      document.getElementById("btn-modern").classList.toggle("active", t === "modern");
+      document.getElementById("btn-ancient").classList.toggle("active", t === "ancient");
+      localStorage.setItem("nostocode-landing-theme", t);
     }
-    // Restore last choice
-    const saved = localStorage.getItem('nostocode-landing-theme');
-    if (saved === 'ancient') setTheme('ancient');
+    setTheme(document.documentElement.getAttribute("data-theme") || "ancient");
   </script>
 </body>
 </html>
